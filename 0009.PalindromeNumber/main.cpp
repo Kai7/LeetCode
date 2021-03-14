@@ -17,4 +17,6 @@ int main(int argc, char **argv){
   checkPalindrome(11);
   checkPalindrome(121);
   checkPalindrome(21120);
+
+  return 0;
 }

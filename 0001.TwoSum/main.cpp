@@ -23,4 +23,6 @@ int main(int argc, char **argv){
   vector<int> test = {2, 3, 4, 7, 9, 11, 13};
   runTwoSum(test, 6);
   runTwoSum(test, 12);
+
+  return 0;
 }

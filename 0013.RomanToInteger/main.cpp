@@ -12,4 +12,6 @@ int main(int argc, char **argv){
   runRomanToInteger("VI");
   runRomanToInteger("IV");
   runRomanToInteger("MCMXCIV");
+
+  return 0;
 }
