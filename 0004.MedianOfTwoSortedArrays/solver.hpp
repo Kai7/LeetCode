@@ -12,9 +12,7 @@ public:
     size_t idx_1 = 0, idx_2 = 0;
     size_t counter = 0;
     double median;
-    std::cout << "idx_m = " << idx_m << std::endl;
     while(idx_1 < nums1.size() && idx_2 < nums2.size()){
-      // std::cout << "counter = " << counter << std::endl;
       if (nums1[idx_1] <= nums2[idx_2]){
         idx_1++;
         if (counter + 1 == idx_m){
