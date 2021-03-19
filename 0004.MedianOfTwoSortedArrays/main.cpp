@@ -5,8 +5,8 @@ void runMedianOfTwoSortedArrays(vector<int>& nums1, vector<int>& nums2){
   Solution solver;
   double m = solver.findMedianSortedArrays(nums1, nums2);
   std::cout << "input:" << std::endl
-            << "\tnums1: " << vector2str(nums1) << std::endl
-            << "\tnums2: " << vector2str(nums2) << std::endl
+            << "\tnums1: " << toString(nums1) << std::endl
+            << "\tnums2: " << toString(nums2) << std::endl
             << "output:" << std::endl
             << "\tmedian = " << m << std::endl;
   return;

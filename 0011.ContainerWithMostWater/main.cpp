@@ -5,7 +5,7 @@
 void runSample(vector<int>& height) {
   Solution solver;
   int ans = solver.maxArea(height);
-  std::cout << "Input: height = " << vector2str(height) << std::endl;
+  std::cout << "Input: height = " << toString(height) << std::endl;
   std::cout << "Output: " << ans << std::endl;
 }
 

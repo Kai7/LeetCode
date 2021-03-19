@@ -1,22 +1,13 @@
 #include "solver.hpp"
-
-#include <string>
-#include <iterator>
-#include <sstream>
-
-std::string vector2str(vector<int> &nums){
-  std::stringstream sstr;
-  std::copy(nums.begin(), nums.end(), std::ostream_iterator<int>(sstr, ", "));
-  return sstr.str();
-}
+#include "utils/utils.hpp"
 
 void runMergeSortedArray(vector<int>& nums1, int m, vector<int>& nums2, int n){
   Solution solver;
   std::cout << "input:\n"
-            << "\tnums1: " << vector2str(nums1) << std::endl
-            << "\tnums2: " << vector2str(nums2) << std::endl;
+            << "\tnums1: " << toString(nums1) << std::endl
+            << "\tnums2: " << toString(nums2) << std::endl;
   solver.merge(nums1, m, nums2, n);
-  std::cout << "output: " << vector2str(nums1) << std::endl;
+  std::cout << "output: " << toString(nums1) << std::endl;
   return;
 }
 

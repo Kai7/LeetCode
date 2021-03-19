@@ -1,18 +1,10 @@
 #include "solver.hpp"
+#include "utils/utils.hpp"
 
-#include <string>
-#include <iterator>
-#include <sstream>
-
-std::string vector2str(vector<int> &nums){
-  std::stringstream sstr;
-  std::copy(nums.begin(), nums.end(), std::ostream_iterator<int>(sstr, ", "));
-  return sstr.str();
-}
 
 void runMaximumSubarray(vector<int> &nums){
   Solution solver;
-  std::cout << "input:  " << vector2str(nums) << std::endl;
+  std::cout << "input:  " << toString(nums) << std::endl;
   std::cout << "output: " << solver.maxSubArray(nums) << std::endl;
 }
 

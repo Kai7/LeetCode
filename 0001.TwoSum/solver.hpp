@@ -14,7 +14,7 @@ public:
     }
     for (size_t i = 0; i<nums.size(); i++){
       map<int, int>::iterator it = hash_table.find(target - nums[i]);
-      if (it != hash_table.end() && i != it->second){
+      if (it != hash_table.end() && (int) i != it->second){
         result.push_back(i);
         result.push_back(it->second);
         return result;
