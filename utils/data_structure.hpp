@@ -1,5 +1,14 @@
 #ifndef __LEETCODE_DATA_STRUCTURE__
 #define __LEETCODE_DATA_STRUCTURE__
+#include <string>
+#include <vector>
+#include <set>
+#include <map>
+
+using std::string;
+using std::vector;
+using std::set;
+using std::map;
 
 /* Definition for singly-linked list. */
 struct ListNode {

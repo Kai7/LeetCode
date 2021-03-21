@@ -1,15 +1,10 @@
 #ifndef __LEETCODE_UTILS__
 #define __LEETCODE_UTILS__
 
-#include <vector>
-#include <string>
 #include <iterator>
 #include <sstream>
 
 #include "data_structure.hpp"
-
-using std::vector;
-using std::string;
 
 string addQuotationMark(string str){
   return "\"" + str + "\"";
@@ -32,6 +27,21 @@ string toString(vector<string> &strs){
   sstr << "[" << addQuotationMark(strs[0]);
   for (size_t i = 1; i < strs.size(); i++)
     sstr << "," << addQuotationMark(strs[i]);
+  sstr << "]";
+  // std::copy(nums.begin(), nums.end(), std::ostream_iterator<int>(sstr, ", "));
+  return sstr.str();
+}
+
+string toString(set<string> &strs){
+  if (strs.empty()) return "{}";
+  std::stringstream sstr;
+  set<string>::iterator it = strs.begin();
+  sstr << "{" << addQuotationMark(*it);
+  it++;
+  while (it != strs.end()) {
+    sstr << "," << addQuotationMark(*it);
+    it++;
+  }
   sstr << "]";
   // std::copy(nums.begin(), nums.end(), std::ostream_iterator<int>(sstr, ", "));
   return sstr.str();
