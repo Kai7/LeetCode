@@ -1,12 +1,21 @@
+#ifndef __LEETCODE_UTILS__
+#define __LEETCODE_UTILS__
+
 #include <vector>
 #include <string>
 #include <iterator>
 #include <sstream>
 
+#include "data_structure.hpp"
+
 using std::vector;
 using std::string;
 
-std::string toString(vector<int> &nums){
+string addQuotationMark(string str){
+  return "\"" + str + "\"";
+}
+
+string toString(vector<int> &nums){
   if (nums.empty()) return "[]";
   std::stringstream sstr;
   sstr << "[" << nums[0];
@@ -17,18 +26,18 @@ std::string toString(vector<int> &nums){
   return sstr.str();
 }
 
-std::string toString(vector<string> &strs){
+string toString(vector<string> &strs){
   if (strs.empty()) return "[]";
   std::stringstream sstr;
-  sstr << "[" << strs[0];
+  sstr << "[" << addQuotationMark(strs[0]);
   for (size_t i = 1; i < strs.size(); i++)
-    sstr << "," << strs[i];
+    sstr << "," << addQuotationMark(strs[i]);
   sstr << "]";
   // std::copy(nums.begin(), nums.end(), std::ostream_iterator<int>(sstr, ", "));
   return sstr.str();
 }
 
-std::string toString(vector<vector<int>> &nums){
+string toString(vector<vector<int>> &nums){
   if (nums.empty()) return "[]";
   std::stringstream sstr;
   sstr << "[" << toString(nums[0]);
@@ -37,3 +46,36 @@ std::string toString(vector<vector<int>> &nums){
   sstr << "]";
   return sstr.str();
 }
+
+ListNode* createLinkedList(vector<int> &nums) {
+  if(nums.empty()) return nullptr;
+  ListNode *head = new ListNode(nums[0]);
+  ListNode *ptr = head;
+  for (size_t i = 1; i < nums.size(); i++){
+    ptr->next = new ListNode(nums[i]);
+    ptr = ptr->next;
+  }
+  return head;
+}
+
+void deleteLinkedList(ListNode *head){
+  if (head == nullptr) return;
+  ListNode *next_ptr = head->next;
+  delete head;
+  deleteLinkedList(next_ptr);
+}
+
+string toString(ListNode *head){
+  if (head == nullptr) return "[]";
+  std::stringstream sstr;
+  sstr << "<" << head->val;
+  head = head->next;
+  while (head != nullptr) {
+    sstr << "," << head->val;
+    head = head->next;
+  }
+  sstr << ">";
+  return sstr.str();
+}
+
+#endif /* __LEETCODE_UTILS__ */
