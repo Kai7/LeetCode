@@ -57,6 +57,16 @@ string toString(vector<vector<int>> &nums){
   return sstr.str();
 }
 
+string toString_Matrix(vector<vector<int>> &matrix){
+  if (matrix.empty()) return "[[]]";
+  std::stringstream sstr;
+  sstr << "[" << toString(matrix[0]);
+  for (size_t i = 1; i < matrix.size(); i++)
+    sstr << ",\n " << toString(matrix[i]);
+  sstr << "]";
+  return sstr.str();
+}
+
 ListNode* createLinkedList(vector<int> &nums) {
   if(nums.empty()) return nullptr;
   ListNode *head = new ListNode(nums[0]);
@@ -66,6 +76,17 @@ ListNode* createLinkedList(vector<int> &nums) {
     ptr = ptr->next;
   }
   return head;
+}
+
+vector<vector<int>> createSimpleMatrix(size_t r, size_t c){
+  vector<vector<int>> m;
+  int num = 1;
+  for (size_t i = 0; i < r; i++){
+    vector<int> row;
+    for (size_t j = 0; j < c; j++) row.push_back(num++);
+    m.push_back(row);
+  }
+  return m;
 }
 
 void deleteLinkedList(ListNode *head){
