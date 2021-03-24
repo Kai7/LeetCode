@@ -57,6 +57,16 @@ string toString(vector<vector<int>> &nums){
   return sstr.str();
 }
 
+string toString(vector<vector<string>> &strs){
+  if (strs.empty()) return "[]";
+  std::stringstream sstr;
+  sstr << "[" << toString(strs[0]);
+  for (size_t i = 1; i < strs.size(); i++)
+    sstr << "," << toString(strs[i]);
+  sstr << "]";
+  return sstr.str();
+}
+
 string toString_Matrix(vector<vector<int>> &matrix){
   if (matrix.empty()) return "[[]]";
   std::stringstream sstr;
