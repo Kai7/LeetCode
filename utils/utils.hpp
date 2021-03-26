@@ -103,20 +103,64 @@ vector<vector<int>> createSimpleMatrix(size_t r, size_t c){
   return m;
 }
 
+vector<int> createSimpleVector(size_t n){
+  vector<int> v;
+  int num = 1;
+  for (size_t i = 0; i < n; i++){
+    v.push_back(num++);
+  }
+  return v;
+}
+
+#if 0
+/* Can only deal with no-cycle linkedlist. */
 void deleteLinkedList(ListNode *head){
   if (head == nullptr) return;
   ListNode *next_ptr = head->next;
   delete head;
   deleteLinkedList(next_ptr);
 }
+#endif
+
+void deleteLinkedList(ListNode *head){
+  if (head == nullptr) return;
+  set<ListNode*> set_node;
+  while (head != nullptr) {
+    if (set_node.find(head) != set_node.end()) break;
+    set_node.insert(head);
+    head = head->next;
+  }
+  for (set<ListNode*>::iterator it = set_node.begin(); it != set_node.end(); it++){
+    ListNode *ptr = *it;
+    delete ptr;
+  }
+}
+
+ListNode* getRearPtr(ListNode *head){
+  if (head == nullptr) return nullptr;
+  while(head->next != nullptr){
+    head = head->next;
+  }
+  return head;
+}
 
 string toString(ListNode *head){
   if (head == nullptr) return "[]";
+  map<ListNode*, int> node_recorder;
   std::stringstream sstr;
   sstr << "<" << head->val;
+  int counter = 0;
+  node_recorder[head] = counter;
   head = head->next;
   while (head != nullptr) {
+    map<ListNode*, int>::iterator it = node_recorder.find(head);
+    if (it != node_recorder.end()){
+      sstr << "[c:" << it->second << "]";
+      break;
+    }
     sstr << "," << head->val;
+    counter += 1;
+    node_recorder[head] = counter;
     head = head->next;
   }
   sstr << ">";
