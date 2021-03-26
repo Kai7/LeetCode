@@ -10,6 +10,10 @@ string addQuotationMark(string str){
   return "\"" + str + "\"";
 }
 
+string toString(bool b){
+  return (b)?"true":"false";
+}
+
 string toString(vector<int> &nums){
   if (nums.empty()) return "[]";
   std::stringstream sstr;
