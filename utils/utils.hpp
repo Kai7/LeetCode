@@ -3,8 +3,15 @@
 
 #include <iterator>
 #include <sstream>
+#include <algorithm>
+#include <random>
 
 #include "data_structure.hpp"
+
+TreeNode* createBinaryTree(vector<int> &nums);
+void insertBinaryTree(TreeNode *root, int element);
+void insertBinaryTree(TreeNode **root, int element);
+void deleteLinkedList(ListNode *head);
 
 string addQuotationMark(string str){
   return "\"" + str + "\"";
@@ -103,12 +110,20 @@ vector<vector<int>> createSimpleMatrix(size_t r, size_t c){
   return m;
 }
 
-vector<int> createSimpleVector(size_t n){
+vector<int> createVector_Default(size_t n){
   vector<int> v;
   int num = 1;
   for (size_t i = 0; i < n; i++){
     v.push_back(num++);
   }
+  return v;
+}
+
+vector<int> createVector_Random(size_t n){
+  vector<int> v = createVector_Default(n);
+  auto rd = std::random_device {}; 
+  auto rng = std::default_random_engine { rd() };
+  std::shuffle(std::begin(v), std::end(v), rng);
   return v;
 }
 
@@ -165,6 +180,50 @@ string toString(ListNode *head){
   }
   sstr << ">";
   return sstr.str();
+}
+
+string toString_Preorder(TreeNode *root){
+  if (root == nullptr) return "()";
+  std::stringstream sstr;
+  sstr << "(" << root->val;
+  if (root->left != nullptr || root->right != nullptr){
+    sstr << toString_Preorder(root->left) << toString_Preorder(root->right);
+  }
+  sstr << ")";
+  return sstr.str();
+}
+
+TreeNode* createBinaryTree(vector<int> &nums){
+  if (nums.size() == 0) return nullptr;
+  TreeNode *root = new TreeNode(nums[0]);
+  for (size_t i = 1; i < nums.size(); i++) insertBinaryTree(root, nums[i]);
+  return root;
+}
+
+void deleteBinaryTree(TreeNode *root){
+  if (root == nullptr) return;
+  deleteBinaryTree(root->left);
+  deleteBinaryTree(root->right);
+  delete root;
+  return;
+}
+
+void insertBinaryTree(TreeNode *root, int element){
+  if (root == nullptr) return;
+  TreeNode **search_ptr = &root;
+  while (*search_ptr != nullptr){
+    search_ptr = (element > (*search_ptr)->val)? &(*search_ptr)->right: &(*search_ptr)->left;
+  }
+  *search_ptr = new TreeNode(element);
+}
+
+void insertBinaryTree(TreeNode **root, int element){
+  if (root == nullptr) return;
+  TreeNode **search_ptr = root;
+  while (*search_ptr != nullptr){
+    search_ptr = (element > (*search_ptr)->val)? &(*search_ptr)->right: &(*search_ptr)->left;
+  }
+  *search_ptr = new TreeNode(element);
 }
 
 #endif /* __LEETCODE_UTILS__ */

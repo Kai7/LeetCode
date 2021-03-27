@@ -10,7 +10,7 @@ void runSample(ListNode *head){
 }
 
 int main(){
-  vector<int> data = createSimpleVector(1);
+  vector<int> data = createVector_Default(1);
 
   ListNode* head = createLinkedList(data);
   ListNode* rear = getRearPtr(head);
