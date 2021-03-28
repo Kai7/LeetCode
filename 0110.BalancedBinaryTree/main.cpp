@@ -11,9 +11,12 @@ void runSample(TreeNode* root){
 }
 
 int main(){
+  // vector<int> data = createVector_Default(10);
   vector<int> data = createVector_Random(10);
   std::cout << "data: " << toString(data) << std::endl;
-  TreeNode *root = createBinaryTree(data);
+
+  // TreeNode *root = createBinaryTree(data);
+  TreeNode *root = createAVLTree(data);
 
   runSample(root);
 

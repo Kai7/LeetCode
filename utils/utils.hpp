@@ -5,13 +5,23 @@
 #include <sstream>
 #include <algorithm>
 #include <random>
+#include <time.h>
 
 #include "data_structure.hpp"
 
+int getHeight(TreeNode *root);
 TreeNode* createBinaryTree(vector<int> &nums);
 void insertBinaryTree(TreeNode *root, int element);
 void insertBinaryTree(TreeNode **root, int element);
 void deleteLinkedList(ListNode *head);
+
+TreeNode* createAVLTree(ListNode* head);
+TreeNode* insertAVLTree(TreeNode *root, int target);
+TreeNode* balanceAVLTree(TreeNode *root);
+TreeNode* rotation_LL(TreeNode *root);
+TreeNode* rotation_LR(TreeNode *root);
+TreeNode* rotation_RL(TreeNode *root);
+TreeNode* rotation_RR(TreeNode *root);
 
 string addQuotationMark(string str){
   return "\"" + str + "\"";
@@ -224,6 +234,91 @@ void insertBinaryTree(TreeNode **root, int element){
     search_ptr = (element > (*search_ptr)->val)? &(*search_ptr)->right: &(*search_ptr)->left;
   }
   *search_ptr = new TreeNode(element);
+}
+
+
+TreeNode* createAVLTree(vector<int> &nums) {
+  TreeNode *root = nullptr;
+  for (int &element: nums){
+    // std::cout << "  insert: " << element << std::endl;
+    root = insertAVLTree(root, element);
+    // std::cout << "   > preorder: " << toString_Preorder(root) << std::endl;
+  }
+  return root;
+}
+
+TreeNode* createAVLTree(ListNode* head) {
+  TreeNode *root = nullptr;
+  while(head != nullptr){
+    root = insertAVLTree(root, head->val);
+    head = head->next;
+  }
+  return root;
+}
+
+TreeNode* insertAVLTree(TreeNode *root, int element){
+  if (root == nullptr) {
+    root = new TreeNode(element);
+  } else if (element < root->val) {
+    root->left = insertAVLTree(root->left, element);
+    root = balanceAVLTree(root);
+  } else {
+    root->right = insertAVLTree(root->right, element);
+    root = balanceAVLTree(root);
+  }
+  return root;
+}
+
+TreeNode* balanceAVLTree(TreeNode *root){
+  if (root == nullptr) return root;
+  int balance_factor = getHeight(root->left) - getHeight(root->right);
+  if (balance_factor > 1){
+    balance_factor = getHeight(root->left->left) - getHeight(root->left->right);
+    if (balance_factor > 0) return rotation_LL(root);
+    else return rotation_LR(root);
+  } else if (balance_factor < -1) {
+    balance_factor = getHeight(root->right->left) - getHeight(root->right->right);
+    if (balance_factor > 0) return rotation_RL(root);
+    else return rotation_RR(root);
+  }
+  return root;
+}
+
+TreeNode* rotation_LL(TreeNode *root){
+  TreeNode *new_root = root->left;
+  root->left = new_root->right;
+  new_root->right = root;
+  return new_root;
+}
+
+TreeNode* rotation_LR(TreeNode *root){
+  TreeNode *new_root = root->left->right;
+  root->left->right = new_root->left;
+  new_root->left = root->left;
+  root->left = new_root->right;
+  new_root->right = root;
+  return new_root;
+}
+
+TreeNode* rotation_RL(TreeNode *root){
+  TreeNode *new_root = root->right->left;
+  root->right->left = new_root->right;
+  new_root->right = root->right;
+  root->right = new_root->left;
+  new_root->left = root;
+  return new_root;
+}
+
+TreeNode* rotation_RR(TreeNode *root){
+  TreeNode *new_root = root->right;
+  root->right = new_root->left;
+  new_root->left = root;
+  return new_root;
+}
+
+int getHeight(TreeNode *root){
+  if (root == nullptr) return 0;
+  return 1 + MAX(getHeight(root->left), getHeight(root->right));
 }
 
 #endif /* __LEETCODE_UTILS__ */
