@@ -9,6 +9,9 @@
 
 #include "data_structure.hpp"
 
+#define MAX(a,b) (((a)>(b))?(a):(b))
+#define MIN(a,b) (((a)<(b))?(a):(b))
+
 int getHeight(TreeNode *root);
 TreeNode* createBinaryTree(vector<int> &nums);
 void insertBinaryTree(TreeNode *root, int element);
