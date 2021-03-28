@@ -19,12 +19,15 @@ void insertBinaryTree(TreeNode **root, int element);
 void deleteLinkedList(ListNode *head);
 
 TreeNode* createAVLTree(ListNode* head);
-TreeNode* insertAVLTree(TreeNode *root, int target);
+pair<TreeNode*, bool> insertAVLTree(TreeNode *root, int element);
 TreeNode* balanceAVLTree(TreeNode *root);
 TreeNode* rotation_LL(TreeNode *root);
 TreeNode* rotation_LR(TreeNode *root);
 TreeNode* rotation_RL(TreeNode *root);
 TreeNode* rotation_RR(TreeNode *root);
+#if 0
+TreeNode* insertAVLTree(TreeNode *root, int target);
+#endif
 
 string addQuotationMark(string str){
   return "\"" + str + "\"";
@@ -206,6 +209,18 @@ string toString_Preorder(TreeNode *root){
   return sstr.str();
 }
 
+string toString_Inorder(TreeNode *root){
+  if (root == nullptr) return "()";
+  std::stringstream sstr;
+  sstr << "(";
+  if (root->left == nullptr && root->right == nullptr){
+    sstr << root->val << ")";
+    return sstr.str();
+  }
+  sstr << toString_Inorder(root->left) << root->val << toString_Inorder(root->right) << ")";
+  return sstr.str();
+}
+
 TreeNode* createBinaryTree(vector<int> &nums){
   if (nums.size() == 0) return nullptr;
   TreeNode *root = new TreeNode(nums[0]);
@@ -244,7 +259,8 @@ TreeNode* createAVLTree(vector<int> &nums) {
   TreeNode *root = nullptr;
   for (int &element: nums){
     // std::cout << "  insert: " << element << std::endl;
-    root = insertAVLTree(root, element);
+    pair<TreeNode*, bool> insert_result = insertAVLTree(root, element);
+    root = insert_result.first;
     // std::cout << "   > preorder: " << toString_Preorder(root) << std::endl;
   }
   return root;
@@ -253,12 +269,14 @@ TreeNode* createAVLTree(vector<int> &nums) {
 TreeNode* createAVLTree(ListNode* head) {
   TreeNode *root = nullptr;
   while(head != nullptr){
-    root = insertAVLTree(root, head->val);
+    pair<TreeNode*, bool> insert_result = insertAVLTree(root, head->val);
+    root = insert_result.first;
     head = head->next;
   }
   return root;
 }
 
+#if 0
 TreeNode* insertAVLTree(TreeNode *root, int element){
   if (root == nullptr) {
     root = new TreeNode(element);
@@ -269,7 +287,31 @@ TreeNode* insertAVLTree(TreeNode *root, int element){
     root->right = insertAVLTree(root->right, element);
     root = balanceAVLTree(root);
   }
-  return root;
+}
+#endif
+
+pair<TreeNode*, bool> insertAVLTree(TreeNode *root, int element){
+  if (root == nullptr) {
+    root = new TreeNode(element);
+    return {root, false};
+  } 
+  pair<TreeNode*, bool> insert_result = {nullptr, false};
+  if (element < root->val) {
+    insert_result = insertAVLTree(root->left, element);
+    root->left = insert_result.first;
+  } else {
+    insert_result = insertAVLTree(root->right, element);
+    root->right = insert_result.first;
+  }
+  if (!insert_result.second){
+    TreeNode *new_root = balanceAVLTree(root);
+    if (root != new_root) {
+      root = new_root;
+      return {root, true};
+    }
+    return {root, false};
+  }
+  return {root, true};
 }
 
 TreeNode* balanceAVLTree(TreeNode *root){

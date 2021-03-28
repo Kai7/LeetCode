@@ -4,6 +4,7 @@
 
 void runSample(TreeNode* root){
   std::cout << "Intput: root = " << toString_Preorder(root) << std::endl;
+  std::cout << "Intput: root = " << toString_Inorder(root) << std::endl;
   Solution solver;
   bool ans = solver.isBalanced(root);
   std::cout << "Output: " << toString(ans) << std::endl << std::endl;
@@ -12,7 +13,8 @@ void runSample(TreeNode* root){
 
 int main(){
   // vector<int> data = createVector_Default(10);
-  vector<int> data = createVector_Random(10);
+  // vector<int> data = createVector_Random(10);
+  vector<int> data = createVector_Random(100);
   std::cout << "data: " << toString(data) << std::endl;
 
   // TreeNode *root = createBinaryTree(data);
