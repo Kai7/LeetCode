@@ -198,6 +198,63 @@ string toString(ListNode *head){
   return sstr.str();
 }
 
+string toString_Graph(Node *node){
+  if (node == nullptr) return "Graph: {}";
+  int counter = 0;
+  map<Node*, int> map_node2id;
+  queue<Node*> queue_wait;
+  queue_wait.push(node);
+  while(!queue_wait.empty()){
+    Node *t_node = queue_wait.front();
+    queue_wait.pop();
+    if(map_node2id.find(t_node) != map_node2id.end()){
+      continue;
+    }
+    vector<Node*> &t_neighbors = t_node->neighbors;
+    map_node2id[t_node] = counter++;
+    for (size_t i = 0; i < t_neighbors.size(); i++){
+      if(map_node2id.find(t_neighbors[i]) == map_node2id.end()){
+        queue_wait.push(t_neighbors[i]);
+      };
+    }
+  }
+  std::stringstream sstr;
+  sstr << "Graph: {\n";
+  for (auto it = map_node2id.begin(); it != map_node2id.end(); it++){
+    sstr << "\t" << it->first->val << "[" << it->second << "]:[";
+    for (size_t i = 0; i < it->first->neighbors.size(); i++){
+      sstr << map_node2id[it->first->neighbors[i]] << ",";
+    }
+    sstr << "],\n";
+  }
+  sstr << "}\n";
+  return sstr.str();
+}
+
+void deleteGraph(Node *node){
+  std::cout << "delete Graph"<< std::endl;
+  if (node == nullptr) return;
+  set<Node*> set_deleted;
+  queue<Node*> queue_wait;
+  queue_wait.push(node);
+  while(!queue_wait.empty()){
+    Node *t_node = queue_wait.front();
+    queue_wait.pop();
+    if(set_deleted.find(t_node) != set_deleted.end()){
+      continue;
+    }
+    vector<Node*> &t_neighbors = t_node->neighbors;
+    for (size_t i = 0; i < t_neighbors.size(); i++){
+      if(set_deleted.find(t_neighbors[i]) == set_deleted.end()){
+        queue_wait.push(t_neighbors[i]);
+      };
+    }
+    set_deleted.insert(t_node);
+    std::cout << "delete node"<< std::endl;
+    delete t_node;
+  }
+}
+
 string toString_Preorder(TreeNode *root){
   if (root == nullptr) return "()";
   std::stringstream sstr;
