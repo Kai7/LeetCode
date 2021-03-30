@@ -2,8 +2,12 @@
 #include "utils/data_structure.hpp"
 #include "utils/utils.hpp"
 
-void runSample(Node *node){
+Node* runSample(Node *node){
   std::cout << "Input: node = \n" << toString_Graph(node) << std::endl;
+  Solution solver;
+  Node *ans = solver.cloneGraph(node);
+  std::cout << "Output: \n" << toString_Graph(ans) << std::endl << std::endl;
+  return ans;
 }
 
 int main(){
@@ -20,9 +24,10 @@ int main(){
   n4->neighbors.push_back(n1);
   n4->neighbors.push_back(n3);
 
-  runSample(n1);
+  Node *ans = runSample(n1);
 
   deleteGraph(n1);
+  deleteGraph(ans);
 
   return 0;
 }
