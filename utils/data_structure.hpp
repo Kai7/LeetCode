@@ -6,6 +6,7 @@
 #include <map>
 #include <unordered_map>
 #include <queue>
+#include <deque>
 #include <stack>
 
 using std::string;
@@ -16,6 +17,7 @@ using std::unordered_map;
 using std::pair;
 using std::queue;
 using std::stack;
+using std::deque;
 
 /* Definition for singly-linked list. */
 struct ListNode {
