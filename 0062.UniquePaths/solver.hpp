@@ -7,6 +7,7 @@ class Solution {
 public:
   // TODO: Use DP
 
+  /* How it work??? */
   /* Accepted: 100.00, 97.74 */
   int uniquePaths(int m, int n) {
     int min = MIN(m - 1,n - 1), sum = m + n - 2;

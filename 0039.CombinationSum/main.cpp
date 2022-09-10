@@ -10,9 +10,9 @@ void runSample(vector<int>& candidates, int target) {
 }
 
 int main(){
-  // vector<int> candidates = {2,3,6,7};
+  vector<int> candidates = {2,3,6,7};
   // vector<int> candidates = {2,3,5};
-  vector<int> candidates = {2};
+  // vector<int> candidates = {2};
 
   runSample(candidates, 1);
   runSample(candidates, 2);

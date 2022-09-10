@@ -4,8 +4,32 @@
 
 #define MAX(a,b) (((a)>(b))?(a):(b))
 
+#define METHOD 0
+
 class Solution {
 public:
+#if METHOD == 0
+  /* OK */
+  string multiply(string num1, string num2) {
+    int len1 = static_cast<int>(num1.length());
+    int len2 = static_cast<int>(num2.length());
+    int ans_length = len1 + len2;
+    string ans(ans_length, '0');
+    for (int i1 = len1 - 1; i1 >= 0; --i1) {
+      for (int i2 = len2 - 1; i2 >= 0 ; --i2) {
+        int idx = i1 + i2 + 1;
+        int c = (ans[idx] - '0') + (num1[i1] - '0') * (num2[i2] - '0');
+        ans[idx] = '0' + ( c % 10 );
+        ans[idx-1] += ( c / 10 );
+      }
+    }
+    for (int i = 0; i < ans_length; ++i) {
+      if (ans[i] != '0') return ans.substr(i);
+    }
+    return ans.substr(ans_length - 1);
+  }
+
+#elif METHOD == 1
   /* Accepted: 9.84, 5.04 */
   string multiply(string num1, string num2) {
     string ans = "0";
@@ -59,4 +83,8 @@ public:
     if (ans[0] == '0') return "0";
     return ans;
   }
+
+#else
+#error ""
+#endif
 };

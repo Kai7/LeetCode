@@ -6,12 +6,12 @@ using std::vector;
 
 class Solution {
 public:
+  /* 100.00, 34.70 */
   vector<string> letterCombinations(string digits) {
     vector<string> ans;
     if (digits.size() == 0) return ans;
     vector<string> letters = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
     string target = letters[digits[0] - '0'];
-    std::cout << "target: " << target << std::endl;
     for (size_t i = 0; i < target.size(); i++) {
       ans.push_back(target.substr(i,1));
     }

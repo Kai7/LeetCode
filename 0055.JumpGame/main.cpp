@@ -6,7 +6,7 @@ void runSample(vector<int>& nums){
   std::cout << "Input: nums = " << toString(nums) << std::endl;
   Solution solver;
   bool ans = solver.canJump(nums);
-  std::cout << "Output: " << ans << std::endl << std::endl;
+  std::cout << "Output: " << (ans ? "TRUE" : "FALSE") << std::endl << std::endl;
 }
 
 int main(){

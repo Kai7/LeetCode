@@ -13,7 +13,7 @@ int main(){
   // runSample(2, 3);
   // runSample(3, 3);
   // runSample(7, 3);
-  // runSample(3, 7);
-  runSample(10, 10);
+  runSample(3, 7);
+  // runSample(10, 10);
   return 0;
 }

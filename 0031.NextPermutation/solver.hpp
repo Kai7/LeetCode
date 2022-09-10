@@ -3,6 +3,7 @@
 
 class Solution {
 public:
+  /* 74.63, 74.60 */
   void nextPermutation(vector<int>& nums) {
     if (nums.size() == 1) return;
     size_t decrease_idx = nums.size() - 1;
@@ -16,11 +17,6 @@ public:
       size_t swap_idx = findMinGreaterIdx(nums, nums[decrease_idx-1], decrease_idx, nums.size() - 1);
       int tmp = nums[decrease_idx - 1];
       nums[decrease_idx - 1] = nums[swap_idx];
-      while (swap_idx > nums.size() - 1) {
-        if (tmp >= nums[swap_idx - 1]) break;
-        nums[swap_idx] = nums[swap_idx - 1];
-        swap_idx--;
-      }
       nums[swap_idx] = tmp;
     }
     reverse(nums, decrease_idx, nums.size() - 1);

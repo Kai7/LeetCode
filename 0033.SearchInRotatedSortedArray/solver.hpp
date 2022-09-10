@@ -1,8 +1,13 @@
 #include "utils/data_structure.hpp"
 #include <iostream>
 
+#define METHOD 0
+
 class Solution {
 public:
+#if METHOD == 0
+
+#elif METHOD == 1
   /* TODO: Review */
   /* Accepted: 100.00, 79.57 */
   int search(vector<int>& nums, int target) {
@@ -43,4 +48,7 @@ private:
     }
     return pivot;
   }
+#else
+#error ""
+#endif
 };

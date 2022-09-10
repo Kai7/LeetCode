@@ -1,8 +1,12 @@
 #include "utils/data_structure.hpp"
 #include <iostream>
 
+#define METHOD 1
 class Solution {
 public:
+#if METHOD == 0
+
+#elif METHOD == 1
   /* Accepted: 100.00, 93.83 */
   bool searchMatrix(vector<vector<int>>& matrix, int target) {
     if (target < matrix[0][0]) return false;
@@ -22,4 +26,7 @@ public:
     if (target != matrix[i_front][j_rear]) return false;
     return true;
   }
+#else
+#error ""
+#endif
 };

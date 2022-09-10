@@ -11,7 +11,7 @@ void runSearchInsertPosition(vector<int> &nums, int target){
 
 int main(int argc, char **argv){
   vector<int> nums = {1, 3, 5, 6};
-  int target = 5;
+  int target = 2;
   runSearchInsertPosition(nums, target);
   
   return 0;

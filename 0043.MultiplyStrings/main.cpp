@@ -13,10 +13,10 @@ void runSample(string num1, string num2){
 
 int main(){
   // runSample("1", "9");
-  // runSample("123", "789");
+  runSample("123", "456");
   // runSample("99", "9999");
   // runSample("0", "789");
-  runSample("6", "501");
+  // runSample("6", "501");
 
   return 0;
 }

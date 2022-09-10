@@ -1,8 +1,10 @@
 #ifndef __LEETCODE_DATA_STRUCTURE__
 #define __LEETCODE_DATA_STRUCTURE__
 #include <string>
+#include <string_view>
 #include <vector>
 #include <set>
+#include <unordered_set>
 #include <map>
 #include <unordered_map>
 #include <queue>
@@ -10,14 +12,18 @@
 #include <stack>
 
 using std::string;
+using std::string_view;
 using std::vector;
 using std::set;
+using std::unordered_set;
 using std::map;
 using std::unordered_map;
 using std::pair;
 using std::queue;
+using std::priority_queue;
 using std::stack;
 using std::deque;
+
 
 /* Definition for singly-linked list. */
 struct ListNode {

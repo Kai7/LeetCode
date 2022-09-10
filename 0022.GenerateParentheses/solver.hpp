@@ -1,8 +1,45 @@
 #include "utils/data_structure.hpp"
 #include <iostream>
+#include <functional>
+
+#define METHOD 0
 
 class Solution {
 public:
+#if METHOD == 0
+
+  /* 52.45, 87.08 */
+  vector<string> generateParenthesis(int n) {
+    string s;
+    vector<string> ans;
+    int l = 0, r = 0;
+    std::function<void()> backtracking;
+    backtracking = [&backtracking, &ans, &s, &l, &r, n]() {
+      if (r == n) {
+        ans.push_back(s);
+        return;
+      }
+      if (l < n) {
+        ++l;
+        s += '(';
+        backtracking();
+        s.pop_back();
+        --l;
+      }
+      if (l > r) {
+        ++r;
+        s += ')';
+        backtracking();
+        s.pop_back();
+        --r;
+      }
+    };
+    backtracking();
+    
+    return ans;
+  }
+
+#elif METHOD == 1
   vector<string> generateParenthesis(int n) {
     vector<string> ans = genSubParenthesis(0, 0, n);
     return ans;
@@ -25,4 +62,8 @@ public:
     ans_l.insert(ans_l.end(), ans_r.begin(), ans_r.end());
     return ans_l;
   }
+
+#else
+#error ""
+#endif
 };
